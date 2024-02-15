@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/prabhatraghav/star-agile-health-care/', branch: "master"
+                git url: 'https://github.com/muzammilpasha4/star-agile-health-care/', branch: "master"
             }
         }
         stage('Build') {
@@ -15,7 +15,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh 'docker build -t medicureimg .'
-                sh 'docker tag medicureimg:latest techomaniac83/medicureimgaddbook:latest'
+                sh 'docker tag medicureimg:latest muzammilp/medicureimgaddbook:latest'
             }
         }
 
@@ -23,13 +23,13 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo \$PASS | docker login -u \$USER --password-stdin"
-                    sh 'docker push techomaniac83/medicureimgaddbook:latest'
+                    sh 'docker push muzammilp/medicureimgaddbook:latest'
                 }
             }
         }
         stage('Deploy') {
             steps {
-                    sh 'docker run -itd --name medicure -p 80:8082 techomaniac83/medicureimgaddbook:latest'
+                    sh 'docker run -itd --name medicure -p 80:8082 muzammilp/medicureimgaddbook:latest'
                 }
             }
     }
