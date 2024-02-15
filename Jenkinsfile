@@ -21,7 +21,7 @@ pipeline {
 
         stage('Docker login and push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo \$PASS | docker login -u \$USER --password-stdin"
                     sh 'docker push muzammilp/medicureimgaddbook:latest'
                 }
