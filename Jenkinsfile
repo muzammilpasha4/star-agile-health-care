@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh 'docker build -t medicureimg .'
-                sh 'docker tag medicureimg:latest muzammilp/medicureimg8082:latest'
+                sh 'docker build -t muzammilp/medicureimgANBL8082:latest .'
+                #sh 'docker tag medicureimg:latest muzammilp/medicureimg8082:latest'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo \$PASS | docker login -u \$USER --password-stdin"
-                    sh 'docker push muzammilp/medicureimg8082:latest'
+                    sh 'docker push muzammilp/medicureimgANBL8082:latest'
                 }
             }
         }
