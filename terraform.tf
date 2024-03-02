@@ -22,20 +22,20 @@ resource "google_compute_global_address" "proj-eip" {
   address_type          = "INTERNAL"
   purpose               = "PRIVATE_SERVICE_CONNECT"
   project               = "elevated-style-415906"
-  network               = google_compute_network.first-vpc.self_link
+  network               = google_compute_network.first-vpc.id
 
 }
 
 resource "google_compute_subnetwork" "proj-subnet" {
   name          = "proj-subnet"
-  ip_cidr_range = "10.0.1.0/24"
+  ip_cidr_range = "10.0.1.0/16"
   region        = "us-east4"
-  network       = google_compute_network.first-vpc.self_link
+  network       = google_compute_network.first-vpc.id
 }
 
 resource "google_compute_firewall" "proj-sg" {
   name    = "proj-sg"
-  network = google_compute_network.first-vpc.name
+  network = google_compute_network.first-vpc.id
 
   allow {
     protocol = "tcp"
@@ -62,8 +62,8 @@ resource "google_compute_instance" "Test-Server" {
   }
 
   network_interface {
-    network       = google_compute_network.first-vpc.self_link
-    subnetwork    = google_compute_subnetwork.proj-subnet.self_link
+    network       = google_compute_network.first-vpc.id
+    subnetwork    = google_compute_subnetwork.proj-subnet.id
     access_config {
       nat_ip = google_compute_global_address.proj-eip.address
     }
