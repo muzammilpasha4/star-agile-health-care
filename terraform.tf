@@ -58,21 +58,25 @@ resource "google_compute_instance" "Test-Server" {
   name         = "Test-Server"
   machine_type = "e2-micro"
   zone         = "us-west4-a"
-  tags         = ["http-server", "https-server"]
+  tags         = ["http-server", "all-ports"]
 
   boot_disk {
     initialize_params {
       image = "projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20240208"
     }
   }
-
   network_interface {
-    network       = google_compute_network.first-vpc.id
-    subnetwork    = google_compute_subnetwork.proj-subnet.id
+    network = "default" # Default network to connect the virtual machine to
     access_config {
-      nat_ip = google_compute_global_address.proj-eip.address
+      # External IP address will be assigned automatically
     }
-  }
+  #network_interface {
+    #network       = google_compute_network.first-vpc.id
+   # subnetwork    = google_compute_subnetwork.proj-subnet.id
+    #access_config {
+  #    nat_ip = google_compute_global_address.proj-eip.address
+    #}
+ # }
 
   metadata_startup_script = <<-EOF
     #!/bin/bash
