@@ -9,7 +9,7 @@ terraform {
 provider "google" {
   credentials     = file("D:\\GCP-TF\\GCP-ACCOUNT-ACCESS-KEY.json")
   project     = "elevated-style-415906"  
-  region      = "us-central1"
+  region      = "us-east4"
 }
 
 resource "google_compute_network" "first-vpc" {
@@ -28,7 +28,7 @@ resource "google_compute_global_address" "proj-eip" {
 resource "google_compute_subnetwork" "proj-subnet" {
   name          = "proj-subnet"
   ip_cidr_range = "10.0.1.0/24"
-  region        = "us-central1"
+  region        = "us-east4"
   network       = google_compute_network.first-vpc.self_link
 }
 
