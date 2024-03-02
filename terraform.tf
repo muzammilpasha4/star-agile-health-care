@@ -139,7 +139,7 @@ resource "aws_instance" "Test-Server" {
      sudo apt-get update -y
      sudo apt install docker.io -y
      sudo systemctl enable docker
-     sudo docker run -itd -p 8085:8082 muzammilp/insuranceimgaddbook:latest
+     sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
      sudo docker start $(docker ps -aq)
  EOF
  tags = {
