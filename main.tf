@@ -94,7 +94,7 @@ resource "google_compute_instance" "vm_instance_1" {
     connection {
       type        = "ssh"
       user        = var.ssh_username
-      private_key = var.ssh_private_key
+      private_key = file(var.ssh_private_key)
       host        = vm_instance_ip
     }
   }
