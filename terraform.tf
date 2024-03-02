@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("C:\Users\user\Desktop\gcp-key.pem")
+  credentials = file("C:\\Users\\user\\Desktop\\gcp-key.pem")
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
