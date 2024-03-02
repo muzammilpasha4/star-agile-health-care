@@ -39,9 +39,4 @@ pipeline {
                 sh 'sudo terraform apply --auto-approve '
             }
         }
-        stage('Deploy') {
-            steps {
-                    sh 'docker run -itd --name medicure -p 8085:8082 muzammilp/medicureimgtf8082:latest'
-                }
-            }
 }
