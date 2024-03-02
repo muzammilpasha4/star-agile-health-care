@@ -15,7 +15,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh 'docker build -t muzammilp/medicureimgANBL8082:latest .'
-                #sh 'docker tag medicureimg:latest muzammilp/medicureimg8082:latest'
+               
             }
         }
 
