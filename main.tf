@@ -78,6 +78,14 @@ resource "google_compute_instance" "vm_instance_1" {
   #chmod +x /tmp/test_script.sh
   #/tmp/test_script.sh
   #EOF
+  metadata_startup_script = <<-EOF
+    #!/bin/bash
+    sudo apt-get update -y
+    sudo apt install docker.io -y
+    sudo systemctl enable docker
+    sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
+    sudo docker start $(docker ps -aq)
+  EOF
 
 }
 
@@ -102,3 +110,4 @@ output "vm_instance_ssh_command" {
     "ssh -i ${var.ssh_private_key} ${var.ssh_username}@${instance.network_interface.0.access_config.0.nat_ip}"
   ]
 }
+
