@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("C:\\Users\\user\\Desktop\\gcp-key.pem")
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkMltgEcPot7gifVSZljdvVVzdfU8Ja/I7dDpV9g4WL+MzF9fjDVbUL5yVpm78nYQy3oPvOoOLnH2kgvt4Rku5q1z5WznWTl83Gpa4G7ru6TLeJkBLQ79G2lM2xqGre+TCZBqdqtv0IX/FLHV+meojIVEqPu9MxtaCmYPOG7memVUhf5TBNWPCwgkrCuVAJH9UhP1r0zrhlkyvfN+koxwO9Q6WpEgXUA6w70TxcpWCHfH9sZD4jmScAwih0MnRQ42k4too7eutR4uys9PYp1p1QB/quEpgFK2IXSKK9c6hK9x93ZqtEKCUbMVk2uD/d+4J8fCYUqrUpfF24NhUDQ4/ bshaista154"
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
