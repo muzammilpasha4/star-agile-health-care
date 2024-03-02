@@ -6,9 +6,9 @@ terraform {
     }
   }
 }
-
 provider "google" {
-  
+  private_key_id     = "7bc651c0538c4fd28baa4e017a78695606aef18a"
+
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
