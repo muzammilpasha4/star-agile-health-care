@@ -38,21 +38,21 @@ resource "google_compute_network" "first-vpc" {
   #network       = google_compute_network.first-vpc.id
 #}
 
-resource "google_compute_firewall" "proj-sg" {
-  name    = "proj-sg"
-  network = google_compute_network.first-vpc.id
+#resource "google_compute_firewall" "proj-sg" {
+ # name    = "proj-sg"
+ # network = google_compute_network.first-vpc.id
 
-  allow {
-    protocol = "tcp"
-    ports    = ["80", "443","22","8085"]
-  }
+ # allow {
+ #   protocol = "tcp"
+ #   ports    = ["80", "443","22","8085"]
+ # }
 
-  allow {
-    protocol = "icmp"
-  }
+ # allow {
+  #  protocol = "icmp"
+  #}
 
-  source_ranges = ["0.0.0.0/0"]
-}
+ # source_ranges = ["0.0.0.0/0"]
+#}
 
 resource "google_compute_instance" "Test-Server" {
   name         = "Test-Server"
