@@ -7,8 +7,7 @@ terraform {
   }
 }
 provider "google" {
-  private_key_id     = "7bc651c0538c4fd28baa4e017a78695606aef18a"
-
+  credentials     = "D:\\GCP-TF\\GCP-ACCOUNT-ACCESS-KEY.json"
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
@@ -74,7 +73,7 @@ resource "google_compute_instance" "Test-Server" {
     sudo apt-get update -y
     sudo apt install docker.io -y
     sudo systemctl enable docker
-    sudo docker run -itd -p 8085:8082 muzammilp/insuranceimgaddbook:latest
+    sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
     sudo docker start $(docker ps -aq)
   EOF
 }
