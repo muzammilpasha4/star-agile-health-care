@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git url: 'https://github.com/muzammilpasha4/star-agile-health-care/', branch: "master"
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "mvn clean package"
+            }
+        }
+        stage('Build Image') {
+            steps {
+                sh 'docker build -t muzammilp/medicureimgtf8082:latest .'
+               
+            }
+        }
+
+        stage('Docker login and push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo \$PASS | docker login -u \$USER --password-stdin"
+                    sh 'docker push muzammilp/medicureimgtf8082:latest'
+                }
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                // execute 'terraform init' command
+                sh 'sudo terraform init'
+            }
+        }      
+        stage('Terraform Apply') {
+            steps {
+                // execute 'terraform apply' command with auto-approval
+                sh 'sudo terraform apply --auto-approve '
+            }
+        }
+        stage('Deploy') {
+            steps {
+                    sh 'docker run -itd --name medicure -p 8085:8082 muzammilp/medicureimgtf8082:latest'
+                }
+            }
+}
