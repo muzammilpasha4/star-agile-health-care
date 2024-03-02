@@ -39,4 +39,5 @@ pipeline {
                 sh 'sudo terraform apply --auto-approve '
             }
         }
+    }
 }
