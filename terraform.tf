@@ -78,8 +78,6 @@ resource "google_compute_instance" "Test-Server" {
   #    nat_ip = google_compute_global_address.proj-eip.address
     #}
 # }
-}
-
 
   metadata_startup_script = <<-EOF
     #!/bin/bash
