@@ -1,7 +1,7 @@
 # ***************************** BEGIN: EDITING ENVIRONMENT VARIABLES *************************************************
 
 # Define Environmental Variables
-variable "credentials_file" { default = "GCP-ACCOUNT-ACCESS-KEY.json" } # Copy the the service account credentials/authentication file (*.json) in the same folder with main terraform file
+variable "credentials_file" { default = "/home/bshaista154/GCP-ACCOUNT-ACCESS-KEY.json" } # Copy the the service account credentials/authentication file (*.json) in the same folder with main terraform file
 variable "project_id" { default = "elevated-style-415906" }             # Mention the Google Cloud project ID
 variable "region" { default = "us-west4" }                              # Declare the default region where resources will be created
 variable "zone" { default = "us-west4-a" }                              # Declare the default zone for the virtual machine
