@@ -84,12 +84,12 @@ resource "google_compute_instance" "vm_instance_1" {
     inline = [
       # Here you can specify the commands you want to run on the instance.
       # For example, you could install a package, configure a service, or start a script.
-      sudo apt-get update -y
-      sudo apt install docker.io -y
-      sudo systemctl enable docker
-      sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
-      sudo docker start $(docker ps -aq)    ]
-
+      sudo apt-get update -y,
+      sudo apt install docker.io -y,
+      sudo systemctl enable docker,
+      sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest,
+      sudo docker start $(docker ps -aq)
+    ]
     # Define the connection settings for the SSH connection to the instance
     connection {
       type        = "ssh"
