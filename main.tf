@@ -93,8 +93,8 @@ resource "google_compute_instance" "vm_instance_1" {
     # Define the connection settings for the SSH connection to the instance
     connection {
       type        = "ssh"
-      user        = ${var.ssh_username}
-      private_key = ${var.ssh_private_key}
+      user        = var.ssh_username
+      private_key = var.ssh_private_key
       host        = vm_instance_ip
     }
   }
