@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "google" {
-  credentials     = "D:\\GCP-TF\\GCP-ACCOUNT-ACCESS-KEY.json"
+  credentials     = file("D:\\GCP-TF\\GCP-ACCOUNT-ACCESS-KEY.json")
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
