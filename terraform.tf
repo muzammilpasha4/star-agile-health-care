@@ -70,13 +70,16 @@ resource "google_compute_instance" "Test-Server" {
     access_config {
       # External IP address will be assigned automatically
     }
+  }
   #network_interface {
     #network       = google_compute_network.first-vpc.id
    # subnetwork    = google_compute_subnetwork.proj-subnet.id
     #access_config {
   #    nat_ip = google_compute_global_address.proj-eip.address
     #}
- # }
+# }
+}
+
 
   metadata_startup_script = <<-EOF
     #!/bin/bash
