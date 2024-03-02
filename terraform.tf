@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  public_key = $file("/home/bshaista154/.ssh/authorized_keys")
+  
   project     = "elevated-style-415906"  
   region      = "us-central1"
 }
