@@ -14,7 +14,7 @@ variable "network_tags" { default = ["http-server", "all-ports"] }      # Defaul
 
 # Use this command to generate New Key Pair (ssh-keygen -t rsa -f ~/.ssh/<KEY_FILENAME> -C <USERNAME> -b 2048) Pls, replace <KEY_FILENAME> of your choice *.pem and <USERNAME> with your Ubuntu username.
 variable "ssh_public_key" { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkMltgEcPot7gifVSZljdvVVzdfU8Ja/I7dDpV9g4WL+MzF9fjDVbUL5yVpm78nYQy3oPvOoOLnH2kgvt4Rku5q1z5WznWTl83Gpa4G7ru6TLeJkBLQ79G2lM2xqGre+TCZBqdqtv0IX/FLHV+meojIVEqPu9MxtaCmYPOG7memVUhf5TBNWPCwgkrCuVAJH9UhP1r0zrhlkyvfN+koxwO9Q6WpEgXUA6w70TxcpWCHfH9sZD4jmScAwih0MnRQ42k4too7eutR4uys9PYp1p1QB/quEpgFK2IXSKK9c6hK9x93ZqtEKCUbMVk2uD/d+4J8fCYUqrUpfF24NhUDQ4/ bshaista154" } # Paste your default SSH public-keyhere
-variable "ssh_private_key" { default = "gcp-key.pem" }                                                                                                                                                                                                                                                                                                                                                                                             # Copy the SSH Private key file (*.pem) in the same folder with MAIN terraform file
+variable "ssh_private_key" { default = "/home/bshaista154/gcp-key.pem" }                                                                                                                                                                                                                                                                                                                                                                                             # Copy the SSH Private key file (*.pem) in the same folder with MAIN terraform file
 variable "ssh_username" { default = "bshaista154" }                                                                                                                                                                                                                                                                                                                                                                                                # Mention the username for the SSH key metadata
 
 # Select OS image for the virtual machine (only uncomment one OS-image at a time)
@@ -78,14 +78,26 @@ resource "google_compute_instance" "vm_instance_1" {
   #chmod +x /tmp/test_script.sh
   #/tmp/test_script.sh
   #EOF
-  metadata_startup_script = <<-EOF
-    #!/bin/bash
-    sudo apt-get update -y
-    sudo apt install docker.io -y
-    sudo systemctl enable docker
-    sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
-    sudo docker start $(docker ps -aq)
-  EOF
+
+  # Use the remote-exec provisioner to run commands on the instance
+  provisioner "remote-exec" {
+    inline = [
+      # Here you can specify the commands you want to run on the instance.
+      # For example, you could install a package, configure a service, or start a script.
+      sudo apt-get update -y
+      sudo apt install docker.io -y
+      sudo systemctl enable docker
+      sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest
+      sudo docker start $(docker ps -aq)    ]
+
+    # Define the connection settings for the SSH connection to the instance
+    connection {
+      type        = "ssh"
+      user        = ${var.ssh_username}
+      private_key = ${var.ssh_private_key}
+      host        = vm_instance_ip
+    }
+  }
 
 }
 
