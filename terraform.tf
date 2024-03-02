@@ -9,29 +9,34 @@ terraform {
 provider "google" {
   credentials     = file("/home/bshaista154/GCP-ACCOUNT-ACCESS-KEY.json")
   project     = "elevated-style-415906"  
-  region      = "us-east4"
+  region      = "us-west4"
 }
+
+#resource "google_compute_network" "first-vpc" {
+ # name                    = "first-vpc"
+  #auto_create_subnetworks = false
+#}
 
 resource "google_compute_network" "first-vpc" {
+  project                 = "my-project-name"
   name                    = "first-vpc"
-  auto_create_subnetworks = false
+  auto_create_subnetworks = true
 }
 
-resource "google_compute_global_address" "proj-eip" {
-  name                  = "proj-eip"
-  address_type          = "INTERNAL"
-  purpose               = "PRIVATE_SERVICE_CONNECT"
-  project               = "elevated-style-415906"
-  network               = google_compute_network.first-vpc.id
+#resource "google_compute_global_address" "proj-eip" {
+ # name                  = "proj-eip"
+  #address_type          = "INTERNAL"
+  #purpose               = "PRIVATE_SERVICE_CONNECT"
+  #project               = "elevated-style-415906"
+  #network               = google_compute_network.first-vpc.id
+#}
 
-}
-
-resource "google_compute_subnetwork" "proj-subnet" {
-  name          = "proj-subnet"
-  ip_cidr_range = "10.0.1.0/16"
-  region        = "us-east4"
-  network       = google_compute_network.first-vpc.id
-}
+#resource "google_compute_subnetwork" "proj-subnet" {
+ # name          = "proj-subnet"
+ # ip_cidr_range = "10.0.1.0/16"
+  #region        = "us-west4"
+  #network       = google_compute_network.first-vpc.id
+#}
 
 resource "google_compute_firewall" "proj-sg" {
   name    = "proj-sg"
@@ -52,12 +57,12 @@ resource "google_compute_firewall" "proj-sg" {
 resource "google_compute_instance" "Test-Server" {
   name         = "Test-Server"
   machine_type = "e2-micro"
-  zone         = "us-east4-a"
+  zone         = "us-west4-a"
   tags         = ["http-server", "https-server"]
 
   boot_disk {
     initialize_params {
-      image = "projects/ubuntu-os-cloud/global/images/family/ubuntu-22.04-lts"
+      image = "projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20240208"
     }
   }
 
