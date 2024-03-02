@@ -19,10 +19,11 @@ resource "google_compute_network" "first-vpc" {
 
 resource "google_compute_global_address" "proj-eip" {
   name                  = "proj-eip"
-  address_type          = "EXTERNAL"
-  purpose               = "GCE_ENDPOINT"
-  prefix_length         = 32
+  address_type          = "INTERNAL"
+  purpose               = "PRIVATE_SERVICE_CONNECT"
   project               = "elevated-style-415906"
+  network               = google_compute_network.first-vpc.self_link
+
 }
 
 resource "google_compute_subnetwork" "proj-subnet" {
