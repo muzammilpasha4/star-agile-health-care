@@ -55,7 +55,7 @@ resource "google_compute_network" "first-vpc" {
 #}
 
 resource "google_compute_instance" "Test-Server" {
-  name         = "Test-Server"
+  name         = "webserver"
   machine_type = "e2-micro"
   zone         = "us-west4-a"
   tags         = ["http-server", "all-ports"]
