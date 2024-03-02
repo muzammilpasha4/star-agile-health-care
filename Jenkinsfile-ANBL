@@ -27,9 +27,9 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Deployment using Ansible') {
             steps {
-                    sh 'docker run -itd --name medicure -p 8082:8082 muzammilp/medicureimg8082:latest'
+                    ansiblePlaybook become: true, credentialsId: 'login-cred', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
                 }
             }
     }
