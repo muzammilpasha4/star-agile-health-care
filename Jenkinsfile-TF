@@ -39,14 +39,14 @@ pipeline {
                 sh 'sudo terraform apply --auto-approve '
             }
         }
-        #stage('SSH into Instance') {
-         #   steps {
-          #      sh "sudo apt-get update -y"
-           #     sh "sudo apt install docker.io -y"
-            #    sh "sudo systemctl enable docker"
-             #   sh "sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest"
-              #  sh "sudo docker start $(docker ps -aq)" 
-            #}
-        #}
+        /stage('SSH into Instance') {
+         /   steps {
+          /      sh "sudo apt-get update -y"
+           /     sh "sudo apt install docker.io -y"
+            /    sh "sudo systemctl enable docker"
+             /   sh "sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest"
+              /  sh "sudo docker start $(docker ps -aq)" 
+            /}
+        /}
     }
 }
