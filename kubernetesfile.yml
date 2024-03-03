@@ -18,6 +18,9 @@ spec:
           image: muzammilp/medicureimgk8s8082:latest
           ports:
             - containerPort: 8082
+          env:
+            - name: PORT
+              value: "8082"
           
 ---
 apiVersion: v1
