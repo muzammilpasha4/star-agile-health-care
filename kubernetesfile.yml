@@ -17,7 +17,7 @@ spec:
         - name: medicure
           image: muzammilp/insuranceimgaddbook:latest
           ports:
-            - containerPort: 8082
+            - containerPort: 8086
           env:
             - name: PORT
               value: "8086"
@@ -29,7 +29,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8086
-      targetPort: 8082
+    - port: 8082
+      targetPort: 8086
   selector:
     app: medi
