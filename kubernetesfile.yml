@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: medicure
-          image: muzammilp/insuranceimgaddbook:latest
+          image: muzammilp/medicureimgk8s8082:latest
           ports:
             - containerPort: 8086
           env:
