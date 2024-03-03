@@ -32,6 +32,7 @@ pipeline {
                 sh 'sudo kubectl apply -f kubernetesfile.yml'
                 sh 'sudo kubectl get all'
                 sh 'sudo kubectl get pods -o wide'
+                sh 'curl http://checkip.amazonaws.com'
             }
           }
         }
