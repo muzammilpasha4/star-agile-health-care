@@ -88,7 +88,6 @@ resource "google_compute_instance" "vm_instance_1" {
       "sudo apt install docker.io -y",
       "sudo systemctl enable docker",
       "sudo docker run -itd -p 8085:8082 muzammilp/medicureimgtf8082:latest",
-      "sudo docker start $(docker ps -aq)"
     ]
     # Define the connection settings for the SSH connection to the instance
     connection {
