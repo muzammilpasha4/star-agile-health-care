@@ -19,9 +19,6 @@ variable "ssh_username" { default = "bshaista154" }                             
 
 # Select OS image for the virtual machine (only uncomment one OS-image at a time)
 variable "image" { default = "projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20240208" } # Ubuntu 22.04 LTS (Please set 10 GB disk space - required minimum)
-#variable "image" { default = "projects/debian-cloud/global/images/debian-12-bookworm-v20240110" }               # Debian GNU / Linux-12 (Bookworm) (Please set 10 GB disk space - required minimum)
-#variable "image" { default = "projects/centos-cloud/global/images/centos-7-v20240110" }                         # CentOS 7 (Please set 20 GB disk space - required minimum)
-#variable "image" { default = "projects/rocky-linux-cloud/global/images/rocky-linux-9-optimized-gcp-v20240111" } # Rocky Linux 9 (Please set 20 GB disk space - required minimum)
 
 # ***************************** ENDS: EDITING ENVIRONMENT VARIABLES *************************************************
 
@@ -64,20 +61,6 @@ resource "google_compute_instance" "vm_instance_1" {
   metadata = {
     "ssh-keys" = "${var.ssh_username}:${var.ssh_public_key}" # SSH key metadata with customizable username
   }
-
-  #metadata_startup_script = <<-EOF
-  #!/bin/bash
-  # Add your bash commands or scripts here
-  #cd /home
-  #sudo wget https://raw.githubusercontent.com/prabhatraghav/html_test_page-repo/main/testscript.sh
-  #sudo chmod +x /home/testscript.sh
-  #sh /home/testscript.sh
-  #echo "Hello, World!" >> /tmp/hello.txt
-  # Example of running a script stored in Google Cloud Storage
-  #gsutil cp gs://your-bucket-name/your-script.sh /tmp/your-script.sh
-  #chmod +x /tmp/test_script.sh
-  #/tmp/test_script.sh
-  #EOF
 
   # Use the remote-exec provisioner to run commands on the instance
   provisioner "remote-exec" {
